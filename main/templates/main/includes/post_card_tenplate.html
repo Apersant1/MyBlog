@@ -1,28 +1,3 @@
-{% extends 'base.html' %}
-
-
-
-
-
-
-
-
-{% block title %}
-    Blog
-{% endblock %}
-
-
-{% block Navbar_logo %}
-    Main
-
-{% endblock %}
-
-
-{% block content %}
-    <h1 class="mb-5 " >Post :</h1>
-
-{% for post in posts %}
-
     <div class="card  bd-highlight mb-3 col-3" style="margin-left: 100px;">
   <div class="card-header">
     {{ post.data_pub }}
@@ -32,8 +7,11 @@
     <p class="card-text">{{ post.body|truncatewords:15 }}</p>
       <a href="{{ post.get_absolute_url }}" class="btn btn-light">Read</a>
   </div>
+        <div class="card-footer text-muted">
+            Tags:
+            {% for tag in post.tags.all %}
+                <a href="{{ tag.get_absolute_url }}">{{ tag.title }}</a>
+            {% endfor %}
+            
+        </div>
 </div>
-
-{% endfor %}
-
-{% endblock %}
